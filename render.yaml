@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: vue-facecreate-app
+    env: python
+    buildCommand: ""
+    startCommand: bash .render/start.sh
+    repo: https://github.com/wen1213u/vue-facecreate-app
+    branch: main
+    plan: free
