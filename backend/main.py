@@ -13,11 +13,15 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# 取得當前檔案的絕對路徑，再加上 backend/static 路徑
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+
+# 掛載 Vue 靜態檔
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 @app.get("/")
 async def serve_frontend():
-    return FileResponse("static/index.html")
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 # 配置CORS
 app.add_middleware(
